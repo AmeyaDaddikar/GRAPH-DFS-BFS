@@ -28,6 +28,12 @@ void deleteVertex(VERTEX *vertex)
 	deleteList(&vertex->adj_list);
 }
 
+void createGraph(VERTEX *startVertex)
+{
+	int value,tot_nodes,i;
+	
+}
+
 int main()
 {
 	LIST list;

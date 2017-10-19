@@ -49,17 +49,35 @@ void _insert(LIST *list, void* val)
 	}
 }
 
-int _contains(LIST *list, void* key)
+void* getNode(LIST *list, void* key, int (*comp)(void*,void*))
 {
 	NODE *curr = list->head;
 	
 	while(curr != NULL)
-		if(curr->data == key)
+		if((*comp)(list->head->data,key)==0)
+			return curr;
+		else
+			curr = curr->next;
+	
+	return NULL;
+}
+
+int _contains(LIST *list, void* key, int (*comp)(void*,void*))
+{
+	
+	if(getNode(list,key,comp) == NULL)
+		return 0;
+	else
+		return 1;
+	/*NODE *curr = list->head;
+	
+	while(curr != NULL)
+		if((*comp)(list->head->data,key)==0)
 			return 1;
 		else
 			curr = curr->next;
 	
-	return 0;
+	return 0;*/
 }
 
 void _delete(LIST *list, void* val, int (*comp)(void*,void*))
