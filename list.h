@@ -60,20 +60,20 @@ int _contains(LIST *list, void* key)
 	
 	return 0;
 }
-//THIS FUNCTION WILL MESS STUFF UP
+//THIS FUNCTION CAN POTEITIALLY MESS STUFF UP
 //CREATE FUNCTION POINTER TO COMPARE TWO VOID* ARGUMENTS
-/*void _delete(LIST *list, int val)
+void _delete(LIST *list, void* val, int (*comp)(void*,void*))
 {
 	NODE *del_node;
 	
 	if(list->head == NULL)
 		return;
 		
-	if(list->head->data == val)
+	if((*comp)(list->head->data,val)==0)
 	{
 		del_node   = list->head;
 		list->head = list->head->next;
 	}
-}*/
+}
 
 #endif
