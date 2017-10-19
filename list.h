@@ -31,7 +31,7 @@ NODE* getIterator(LIST *list)
 	return list->head;
 }
 
-void _insert(LIST *list, int val)
+void _insert(LIST *list, void* val)
 {
 	NODE *new_node = newNode(NULL,val);
 	
@@ -48,7 +48,7 @@ void _insert(LIST *list, int val)
 	}
 }
 
-int _contains(LIST *list, int key)
+int _contains(LIST *list, void* key)
 {
 	NODE *curr = list->head;
 	
@@ -60,6 +60,8 @@ int _contains(LIST *list, int key)
 	
 	return 0;
 }
+//THIS FUNCTION WILL MESS STUFF UP
+//CREATE FUNCTION POINTER TO COMPARE TWO VOID* ARGUMENTS
 /*void _delete(LIST *list, int val)
 {
 	NODE *del_node;

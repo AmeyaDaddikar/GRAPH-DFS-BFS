@@ -27,18 +27,18 @@ int isStackEmpty(STACK *stack)
 		return 0;
 }
 
-void push(STACK *stack, int val)
+void push(STACK *stack, void *val)
 {
 	stack->top = newNode(stack->top,val);
 }
 
-int pop(STACK *stack)
+void* pop(STACK *stack)
 {
 	if(isStackEmpty(stack))
-		return -1;
+		return NULL;
 	else
 	{
-		int top_val = stack->top->data;
+		void* top_val = stack->top->data;
 		NODE *del_node = stack->top;
 		
 		stack->top = stack->top->next;

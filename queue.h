@@ -21,15 +21,15 @@ void deleteQueue(QUEUE *queue)
 	deleteAllNodes(queue->front);
 }
 
-int isQueueEmpty(QUEUE *queue,int (*comp)(void*,void*))
+int isQueueEmpty(QUEUE *queue)
 {
-	if()
+	if(queue->front == NULL)
 		return 1;
 	else
 		return 0;
 }
 
-void enqueue(QUEUE *queue, int val)
+void enqueue(QUEUE *queue, void* val)
 {
 	NODE *new_node = newNode(NULL,val);
 
@@ -45,13 +45,13 @@ void enqueue(QUEUE *queue, int val)
 	}
 }
 
-int dequeue(QUEUE *queue)
+void* dequeue(QUEUE *queue)
 {
 	if(isQueueEmpty(queue))
-		return -1;
+		return NULL;
 	else
 	{
-		int top = queue->front->data;
+		void* top = queue->front->data;
 		NODE *del_node = queue->front;
 		queue->front = queue->front->next;
 		
