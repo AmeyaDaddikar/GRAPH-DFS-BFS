@@ -9,9 +9,10 @@ typedef struct stack{
 	
 } STACK;
 
-void createStack(STACK *stack)
+STACK* createStack(STACK *stack)
 {
 	stack->top = NULL;
+	return stack;
 }
 
 void deleteStack(STACK *stack)

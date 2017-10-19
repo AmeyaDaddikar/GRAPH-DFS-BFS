@@ -10,10 +10,11 @@ typedef struct queue {
 	
 } QUEUE;
 
-void createQueue(QUEUE *queue)
+QUEUE* createQueue(QUEUE *queue)
 {
 	queue->front = NULL;
 	queue->rear  = NULL;
+	return queue;
 }
 
 void deleteQueue(QUEUE *queue)

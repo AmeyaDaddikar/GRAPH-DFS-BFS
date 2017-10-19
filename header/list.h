@@ -8,9 +8,10 @@ typedef struct list {
 	NODE *head;
 } LIST;
 
-void createList(LIST *list)
+LIST* createList(LIST *list)
 {
 	list->head = NULL;
+	return list;
 }
 
 void deleteList(LIST *list)
@@ -60,8 +61,7 @@ int _contains(LIST *list, void* key)
 	
 	return 0;
 }
-//THIS FUNCTION CAN POTEITIALLY MESS STUFF UP
-//CREATE FUNCTION POINTER TO COMPARE TWO VOID* ARGUMENTS
+
 void _delete(LIST *list, void* val, int (*comp)(void*,void*))
 {
 	NODE *del_node;
