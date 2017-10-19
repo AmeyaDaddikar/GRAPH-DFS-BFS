@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "queue.h"
-#include "stack.h"
-#include "list.h"
+#include "header/queue.h"
+#include "header/stack.h"
+#include "header/list.h"
 
 typedef struct vertex{
 	
