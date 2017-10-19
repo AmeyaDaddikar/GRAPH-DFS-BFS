@@ -30,8 +30,58 @@ void deleteVertex(VERTEX *vertex)
 
 void createGraph(VERTEX *startVertex)
 {
-	int value,tot_nodes,i;
+	int value,option=0;
 	
+	LIST vertexList;
+	createList(&vertexList);
+	
+	do{
+		printf("ENTER THE VALUE/NAME OF THE VERTEX\n");
+		scanf("%d",&value);
+		
+		VERTEX *new_vertex = (VERTEX*) malloc(sizeof(VERTEX));
+		_insert(&vertexList,createVertex(new_vertex,value));
+
+		printf("ENTER ANOTHER VERTEX? input 0 for no\n");
+		scanf("%d",&option);
+		
+	}while(option);
+	
+	ITERATOR *vertexListIterator = (ITERATOR*)(getIterator(&vertexList));
+	ITERATOR *firstVertex = vertexListIterator;
+	
+	while(vertexListIterator !=  NULL)
+	{
+		option = 0;
+		value  = 0;
+		VERTEX* curr_vertex = (VERTEX*) (vertexListIterator->data);
+		
+		printf("CURRENT VERTEX = %d\n",curr_vertex->val);
+		
+		printf("INPUT THE ADJACENT VERTICES. press 0 if no more vertex in adjacecncy list\n");
+		scanf("%d",&option);
+		
+		while(option != 0)
+		{
+			printf("INPUT THE NAME/VALUE OF THE ADJACENT VERTEX\n");
+			scanf("%d",&value);
+			
+			VERTEX *neighbour = (VERTEX*)(getNode(&vertexList,&value,&compareVertexInt));
+			_insert(&curr_vertex->adj_list,neighbour);
+			
+			printf("INPUT THE ADJACENT VERTICES. press 0 if no more vertex in adjacecncy list\n");
+			scanf("%d",&option);			
+		}
+		
+		vertexListIterator = vertexListIterator->next;
+	}
+
+	if(startVertex != NULL)
+		*startVertex = *((VERTEX*)(firstVertex->data));
+	else
+		createVertex(startVertex,-1);
+	
+	deleteList(&vertexList);
 }
 
 int main()
@@ -44,12 +94,13 @@ int main()
 	createList(&list);
 	createQueue(&queue);
 	createStack(&stack);
-	createVertex(&vertex,-1);
+	
+	createGraph(&vertex);
 	
 	deleteList(&list);
 	deleteQueue(&queue);
 	deleteStack(&stack);
-	deleteVertex(&vertex);
+	//deleteVertex(&vertex);
 	
 	return 0;
 }

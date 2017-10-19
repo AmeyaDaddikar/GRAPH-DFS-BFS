@@ -9,6 +9,8 @@ typedef struct node
 	struct node *next;
 } NODE;
 
+typedef NODE ITERATOR;
+
 NODE* newNode(NODE *nextNode, void* currData)
 {
 	NODE *new_node = (NODE*) malloc(sizeof(NODE));

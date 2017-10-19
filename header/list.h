@@ -40,7 +40,7 @@ void _insert(LIST *list, void* val)
 		list->head = new_node;
 	else
 	{
-		NODE *curr = list->head;
+		ITERATOR *curr = list->head;
 		
 		while(curr->next != NULL)
 			curr = curr->next;
@@ -51,7 +51,7 @@ void _insert(LIST *list, void* val)
 
 void* getNode(LIST *list, void* key, int (*comp)(void*,void*))
 {
-	NODE *curr = list->head;
+	ITERATOR *curr = list->head;
 	
 	while(curr != NULL)
 		if((*comp)(list->head->data,key)==0)
@@ -69,15 +69,6 @@ int _contains(LIST *list, void* key, int (*comp)(void*,void*))
 		return 0;
 	else
 		return 1;
-	/*NODE *curr = list->head;
-	
-	while(curr != NULL)
-		if((*comp)(list->head->data,key)==0)
-			return 1;
-		else
-			curr = curr->next;
-	
-	return 0;*/
 }
 
 void _delete(LIST *list, void* val, int (*comp)(void*,void*))
@@ -86,12 +77,34 @@ void _delete(LIST *list, void* val, int (*comp)(void*,void*))
 	
 	if(list->head == NULL)
 		return;
-		
+	
 	if((*comp)(list->head->data,val)==0)
 	{
 		del_node   = list->head;
 		list->head = list->head->next;
+		return;
 	}
+	
+	ITERATOR *prev = list->head;
+	ITERATOR *curr = list->head->next;
+	
+	while(curr != NULL)
+	{
+		if((*comp)(curr->data,val)==0)
+		{
+			del_node = curr;
+			prev->next = curr->next;
+			
+			free(del_node);
+			return;
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+	}
+	return;
 }
 
 #endif
