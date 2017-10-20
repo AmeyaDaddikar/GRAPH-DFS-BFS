@@ -28,7 +28,7 @@ void deleteVertex(VERTEX *vertex)
 	deleteList(&vertex->adj_list);
 }
 
-void createGraph(VERTEX *startVertex)
+LIST createGraph(VERTEX *startVertex)
 {
 	int value,option=0;
 	
@@ -81,26 +81,108 @@ void createGraph(VERTEX *startVertex)
 	else
 		createVertex(startVertex,-1);
 	
-	deleteList(&vertexList);
+	return vertexList;
 }
+
+void deleteGraph(LIST *vertex_list)
+{
+	ITERATOR* curr_vertex_node = getIterator(vertex_list);
+
+	while(curr_vertex_node != NULL)
+	{
+		deleteVertex(curr_vertex_node->data);
+		curr_vertex_node = curr_vertex_node->next;
+	}
+	
+	deleteList(vertex_list);
+}
+
+void breadth_first_search(VERTEX *startVertex)
+{
+	LIST visited_list;
+	createList(&visited_list);
+
+	QUEUE vertex_queue;
+	createQueue(&vertex_queue);
+	enqueue(&vertex_queue,startVertex);
+	
+	while(!isQueueEmpty(&vertex_queue))
+	{
+		VERTEX *curr = (VERTEX*)(dequeue(&vertex_queue));
+		ITERATOR *curr_neighbour = (ITERATOR*)(getIterator(&curr->adj_list));
+		
+		printf("%d ",curr->val);
+		
+		while(curr_neighbour != NULL)
+		{
+			if(_contains(&visited_list,curr_neighbour,&compareVertex) == 0)
+				enqueue(&vertex_queue,curr_neighbour);
+			
+			curr_neighbour = curr_neighbour->next;
+		}
+	}
+	
+	
+	deleteQueue(&vertex_queue);
+	deleteList(&visited_list);
+}
+
+void depth_first_search(VERTEX *startVertex)
+{
+	LIST visited_list;
+	createList(&visited_list);
+
+	STACK vertex_stack;
+	createStack(&vertex_stack);
+	push(&vertex_stack,startVertex);
+	
+	while(!isStackEmpty(&vertex_stack))
+	{
+		VERTEX *curr = (VERTEX*)(pop(&vertex_stack));		
+		ITERATOR *curr_neighbour = (ITERATOR*)(getIterator(&curr->adj_list));
+
+		printf("%d ",curr->val);
+
+		while(curr_neighbour != NULL)
+		{
+			if(_contains(&visited_list,curr_neighbour,&compareVertex) == 0)
+				push(&vertex_stack,curr_neighbour);
+
+			curr_neighbour = curr_neighbour->next;
+		}
+		
+	}
+	
+	deleteStack(&vertex_stack);
+	deleteList(&visited_list);	
+}
+
 
 int main()
 {
-	LIST list;
-	QUEUE queue;
-	STACK stack;
-	VERTEX vertex;
+	printf("CREATE A GRAPH\n\n\n");
 	
-	createList(&list);
-	createQueue(&queue);
-	createStack(&stack);
+	int option;
+	VERTEX FirstVertex;
+	LIST VertexList = createGraph(&FirstVertex);
 	
-	createGraph(&vertex);
+	printf("CHOOSE 1. breadth first search 2. depth first search\n\n");
+	scanf("%d",&option);
 	
-	deleteList(&list);
-	deleteQueue(&queue);
-	deleteStack(&stack);
-	//deleteVertex(&vertex);
+	switch(option)
+	{
+		case 1:
+			breadth_first_search(&FirstVertex);
+			break;
+		case 2:
+			depth_first_search(&FirstVertex);
+			break;
+		default:
+			printf("INVALID OPTION\n\n");
+			break;
+	}
+	
+	deleteGraph(&VertexList);
 	
 	return 0;
 }
