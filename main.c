@@ -66,7 +66,14 @@ LIST createGraph(VERTEX *startVertex)
 			printf("INPUT THE NAME/VALUE OF THE ADJACENT VERTEX\n");
 			scanf("%d",&value);
 			
-			VERTEX *neighbour = (VERTEX*)(getNode(&vertexList,&value,&compareVertexInt));
+			VERTEX *neighbour;
+			NODE *neighbour_node = getNode(&vertexList,&value,&compareVertexInt);
+			
+			if(neighbour_node == NULL)
+				neighbour = NULL;
+			else
+				*neighbour = *((VERTEX*)(neighbour_node->data));
+				
 			_insert(&curr_vertex->adj_list,neighbour);
 			
 			printf("INPUT THE ADJACENT VERTICES. press 0 if no more vertex in adjacecncy list\n");
@@ -109,16 +116,16 @@ void breadth_first_search(VERTEX *startVertex)
 	while(!isQueueEmpty(&vertex_queue))
 	{
 		VERTEX *curr = (VERTEX*)(dequeue(&vertex_queue));
-		ITERATOR *curr_neighbour = (ITERATOR*)(getIterator(&curr->adj_list));
+		ITERATOR *curr_node = (ITERATOR*)(getIterator(&curr->adj_list));
 		
 		printf("%d ",curr->val);
 		
-		while(curr_neighbour != NULL)
+		while(curr_node != NULL)
 		{
-			if(_contains(&visited_list,curr_neighbour,&compareVertex) == 0)
-				enqueue(&vertex_queue,curr_neighbour);
+			if(_contains(&visited_list,curr_node->data,&compareVertex) == 0)
+				enqueue(&vertex_queue,curr_node->data);
 			
-			curr_neighbour = curr_neighbour->next;
+			curr_node = curr_node->next;
 		}
 	}
 	
@@ -139,16 +146,16 @@ void depth_first_search(VERTEX *startVertex)
 	while(!isStackEmpty(&vertex_stack))
 	{
 		VERTEX *curr = (VERTEX*)(pop(&vertex_stack));		
-		ITERATOR *curr_neighbour = (ITERATOR*)(getIterator(&curr->adj_list));
+		ITERATOR *curr_node = (ITERATOR*)(getIterator(&curr->adj_list));
 
 		printf("%d ",curr->val);
 
-		while(curr_neighbour != NULL)
+		while(curr_node != NULL)
 		{
-			if(_contains(&visited_list,curr_neighbour,&compareVertex) == 0)
-				push(&vertex_stack,curr_neighbour);
+			if(_contains(&visited_list,curr_node->data,&compareVertex) == 0)
+				push(&vertex_stack,curr_node->data);
 
-			curr_neighbour = curr_neighbour->next;
+			curr_node = curr_node->next;
 		}
 		
 	}
