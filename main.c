@@ -53,7 +53,7 @@ LIST createGraph(VERTEX *startVertex)
 	while(vertexListIterator !=  NULL)
 	{
 		option = 0;
-		value  = 0;
+
 		VERTEX* curr_vertex = (VERTEX*) (vertexListIterator->data);
 		
 		printf("CURRENT VERTEX = %d\n",curr_vertex->val);
@@ -63,9 +63,12 @@ LIST createGraph(VERTEX *startVertex)
 		
 		while(option != 0)
 		{
-			printf("INPUT THE NAME/VALUE OF THE ADJACENT VERTEX\n");
-			scanf("%d",&value);
+			int* vertex_value  = (int*) malloc(sizeof(int));
 			
+			printf("INPUT THE NAME/VALUE OF THE ADJACENT VERTEX\n");
+			scanf("%d",vertex_value);
+			
+<<<<<<< HEAD
 			VERTEX *neighbour;
 			NODE *neighbour_node = getNode(&vertexList,&value,&compareVertexInt);
 			
@@ -74,6 +77,10 @@ LIST createGraph(VERTEX *startVertex)
 			else
 				*neighbour = *((VERTEX*)(neighbour_node->data));
 				
+=======
+			NODE* neighbour_node = (NODE*)(getNode(&vertexList,vertex_value,&compareVertexInt));
+			VERTEX *neighbour = (VERTEX*)(neighbour_node->data);
+>>>>>>> a7a671ee15f785b0d9df05087fe2797ad1dcf92d
 			_insert(&curr_vertex->adj_list,neighbour);
 			
 			printf("INPUT THE ADJACENT VERTICES. press 0 if no more vertex in adjacecncy list\n");

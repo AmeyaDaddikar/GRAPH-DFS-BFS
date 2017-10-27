@@ -54,7 +54,7 @@ void* getNode(LIST *list, void* key, int (*comp)(void*,void*))
 	ITERATOR *curr = list->head;
 	
 	while(curr != NULL)
-		if((*comp)(list->head->data,key)==0)
+		if((*comp)(curr->data,key)==0)
 			return curr;
 		else
 			curr = curr->next;
