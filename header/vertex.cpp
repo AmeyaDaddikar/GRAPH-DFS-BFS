@@ -1,3 +1,4 @@
+typedef list<vertex> VERTEX_LIST;
 //////////CONSTRUCTORS/////////////////////
 vertex::vertex()
 {
@@ -11,8 +12,13 @@ vertex::vertex(char name)
 	this->adj_list = list<vertex> ();
 }
 
-////////FRIEND FUNCTIONS/////////////////
+////////FRIEND FUNCTIONS (COMPARATORS)/////////////////
 bool operator == (const vertex &v,const char &c)
+{
+	return (v.name == c) ;
+}
+
+bool operator == (const char &c,const vertex &v)
 {
 	return (v.name == c) ;
 }
@@ -26,7 +32,10 @@ bool operator == (const vertex &v1,const vertex &v2)
 
 void vertex::addNeighbour(vertex &v)
 {
-	this->adj_list.insert(adj_list.end(),v);
+	if(std::find(this->adj_list.begin(),this->adj_list.end(), v) != this->adj_list.end())
+		this->adj_list.insert(adj_list.end(),v);
+	else
+		cout << "LIST ALREADY CONTAINS THE VERTEX" << endl;
 }
 
 void vertex::depth_first_search()
