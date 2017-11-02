@@ -81,7 +81,7 @@ int main()
 		cout << endl;
 		cout << "-----------------------------------------------------------" << endl;
 		
-		cout << "Enter the vertex name to be considered as head ... (NAME SHOULD BE 1 character LONG)" << endl;
+		cout << "Enter the vertex name to be considered as start vertex ... (NAME SHOULD BE 1 character LONG)" << endl;
 		cin >> v_name;
 		
 		start_vertex = find(vertex_list.begin(), vertex_list.end(), v_name);
