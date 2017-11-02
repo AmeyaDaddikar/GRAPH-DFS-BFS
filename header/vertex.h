@@ -22,7 +22,7 @@ public:
 	friend bool operator == (const char &c,const vertex &v);
 	friend bool operator == (const vertex &v1,const vertex &v2);
 	
-	char getName(){return this->name;}
+	char getName(){return this->name;}						//Get functions
 	list<vertex>& getAdjList(){return this->adj_list;}
 	
 	void addNeighbour(vertex &v);
