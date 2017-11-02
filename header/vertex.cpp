@@ -17,6 +17,11 @@ bool operator == (vertex &v, char &c)
 	return (v.name == c) ;
 }
 
+bool operator == (vertex &v1, vertex &v2)
+{
+	return (v1.name == v2.name) ;
+}
+
 //////CLASS FUNCTIONS//////////////////
 
 void vertex::depth_first_search()

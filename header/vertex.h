@@ -19,7 +19,8 @@ public:
 	vertex(char name);
 	
 	friend bool operator == (vertex &v, char &c);
-
+	friend bool operator == (vertex &v1, vertex &v2);
+	
 	char getName(){return this->name;}
 	
 	void depth_first_search();
