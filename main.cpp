@@ -13,10 +13,12 @@ int main()
 	VERTEX_LIST::iterator start_vertex;
 	bool option_flag = false;
 	
+	cout << "-----------------------------------------------------------" << endl;
 	cout << "This program works best for simple directed and undirected graphs." << endl;
 	cout << "Multigraphs can also be enabled quite easily (by changing one line in source code" << endl;
 	cout << "However, a multigraph doesn't serve any purpose for dfs and bfs algorithms." << endl;
-	
+	cout << "-----------------------------------------------------------" << endl;
+
 	do{		
 		cout << "Give a vertex name ... (NAME SHOULD BE 1 character LONG)" << endl;
 		cin >> v_name;
@@ -91,6 +93,38 @@ int main()
 		else			
 			break;
 	}
+	
+	do{
+		int option;
+		
+		cout << "CHOOSE ONE OF THE FOLLOWING OPTIONS ..." << endl;
+		cout << "1. Breadth First Search (BFS)" << endl;
+		cout << "2. Depth First Search (DFS)" << endl;
+		
+		cin >> option;
+		
+		cout << "-----------------------------------------------------------" << endl;
+		switch(option)
+		{
+			case 1:
+				start_vertex->breadth_first_search();
+				break;
+				
+			case 2:
+				start_vertex->depth_first_search();
+				break;
+				
+			default:
+				cout << "INVALID OPTION CHOSEN" << endl;
+		}
+		cout << "-----------------------------------------------------------" << endl;
+		
+		cout << "Print graph again? ...\n PRESS 0 FOR NO" << endl;
+		cin >> option_flag;
+
+	}while(option_flag);
+	
+	cout << "PROGRAM ENDED" << endl;
 	
 	return 0;
 }
