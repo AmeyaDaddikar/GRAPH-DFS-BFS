@@ -12,17 +12,22 @@ vertex::vertex(char name)
 }
 
 ////////FRIEND FUNCTIONS/////////////////
-bool operator == (vertex &v, char &c)
+bool operator == (const vertex &v,const char &c)
 {
 	return (v.name == c) ;
 }
 
-bool operator == (vertex &v1, vertex &v2)
+bool operator == (const vertex &v1,const vertex &v2)
 {
 	return (v1.name == v2.name) ;
 }
 
 //////CLASS FUNCTIONS//////////////////
+
+void vertex::addNeighbour(vertex &v)
+{
+	this->adj_list.insert(adj_list.end(),v);
+}
 
 void vertex::depth_first_search()
 {

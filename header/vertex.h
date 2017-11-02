@@ -18,10 +18,11 @@ public:
 	vertex();
 	vertex(char name);
 	
-	friend bool operator == (vertex &v, char &c);
-	friend bool operator == (vertex &v1, vertex &v2);
+	friend bool operator == (const vertex &v, const char &c);
+	friend bool operator == (const vertex &v1,const vertex &v2);
 	
 	char getName(){return this->name;}
+	void addNeighbour(vertex &v);
 	
 	void depth_first_search();
 	void breadth_first_search();
