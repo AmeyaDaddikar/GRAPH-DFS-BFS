@@ -12,6 +12,12 @@ vertex::vertex(char name)
 	this->adj_list = list<vertex> ();
 }
 
+vertex::vertex(const vertex &v)
+{
+	this->name = v.name;
+	this->adj_list = v.adj_list;
+}
+
 ////////FRIEND FUNCTIONS (COMPARATORS)/////////////////
 bool operator == (const vertex &v,const char &c)
 {
@@ -32,10 +38,7 @@ bool operator == (const vertex &v1,const vertex &v2)
 
 void vertex::addNeighbour(vertex &v)
 {
-	if(std::find(this->adj_list.begin(),this->adj_list.end(), v) != this->adj_list.end())
-		cout << "LIST ALREADY CONTAINS THE VERTEX" << endl;
-	else
-		this->adj_list.insert(adj_list.end(),v);
+	this->adj_list.insert(adj_list.end(),v);
 }
 
 void vertex::depth_first_search()
@@ -45,16 +48,16 @@ void vertex::depth_first_search()
 	
 	vertex_stack.push(*this);
 	
-	while(vertex_stack.size() != 0)
+	while(vertex_stack.size() > 0)
 	{
 		vertex curr_vertex = vertex_stack.top();
 		vertex_stack.pop();
 		
 		cout << curr_vertex.getName() << ' ';
 		
-		VERTEX_LIST &neighbour_list = curr_vertex.getAdjList();
+		VERTEX_LIST *neighbour_list = curr_vertex.getAdjList();
 		
-		for(VERTEX_LIST::iterator it = neighbour_list.begin(); it != neighbour_list.end(); it++)
+		for(VERTEX_LIST::iterator it = neighbour_list->begin(); it != neighbour_list->end(); it++)
 		{
 			vertex *neighbour = &(*it);
 			
@@ -72,16 +75,16 @@ void vertex::breadth_first_search()
 
 	vertex_queue.push(*this);
 	
-	while(vertex_queue.size() != 0)
+	while(vertex_queue.size() > 0)
 	{
 		vertex curr_vertex = vertex_queue.front();		
 		vertex_queue.pop();
 		
 		cout << curr_vertex.getName() << ' ';
 		
-		VERTEX_LIST &neighbour_list = curr_vertex.getAdjList();
+		VERTEX_LIST *neighbour_list = curr_vertex.getAdjList();
 
-		for(VERTEX_LIST::iterator it = neighbour_list.begin(); it != neighbour_list.end(); it++)
+		for(VERTEX_LIST::iterator it = neighbour_list->begin(); it != neighbour_list->end(); it++)
 		{
 			vertex *neighbour = &(*it);
 			
@@ -91,6 +94,3 @@ void vertex::breadth_first_search()
 	}
 	cout << endl;
 }
-
-
-

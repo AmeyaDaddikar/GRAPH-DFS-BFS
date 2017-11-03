@@ -17,15 +17,16 @@ private:
 public:
 	vertex();
 	vertex(char name);
+	vertex(const vertex &v);
 	
 	friend bool operator == (const vertex &v, const char &c);	//COMPARATORS
 	friend bool operator == (const char &c,const vertex &v);
 	friend bool operator == (const vertex &v1,const vertex &v2);
 	
-	char getName(){return this->name;}						//Get functions
-	list<vertex>& getAdjList(){return this->adj_list;}
+	char getName(){return name;}						//Get functions
+	list<vertex>* getAdjList(){return &adj_list;}
 	
-	void addNeighbour(vertex &v);
+	void addNeighbour(vertex &v);						//Adds neighbour to adj-list
 	
 	void depth_first_search();
 	void breadth_first_search();

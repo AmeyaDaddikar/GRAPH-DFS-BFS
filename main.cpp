@@ -11,12 +11,10 @@ int main()
 	char v_name;
 	VERTEX_LIST vertex_list;
 	VERTEX_LIST::iterator start_vertex;
-	bool option_flag = false;
+	int option_flag = 0;
 	
 	cout << "-----------------------------------------------------------" << endl;
-	cout << "This program works best for simple directed and undirected graphs." << endl;
-	cout << "Multigraphs can also be enabled quite easily (by changing one line in source code" << endl;
-	cout << "However, a multigraph doesn't serve any purpose for dfs and bfs algorithms." << endl;
+	cout << "This program works best for simple graphs and multigraphs." << endl;
 	cout << "-----------------------------------------------------------" << endl;
 
 	do{		
@@ -59,14 +57,15 @@ int main()
 			else
 			{
 				it->addNeighbour(*neighbour);
-				cout << "VERTEX " << neighbour->getName() << " set as neighbour of " << it->getName() << endl; 
+				cout << "VERTEX " << neighbour->getName() << " set as neighbour of " << it->getName() << endl;
+				 
 			}
 		}
 		
 		cout << "ADJACENT LIST OF VERTEX " << it->getName() << endl;
-		VERTEX_LIST &adj_list = it->getAdjList();
+		VERTEX_LIST *adj_list = it->getAdjList();
 		
-		for(VERTEX_LIST::iterator curr = adj_list.begin(); curr != adj_list.end(); curr++)
+		for(VERTEX_LIST::iterator curr = adj_list->begin(); curr != adj_list->end(); curr++)
 			cout << curr->getName() << ' ';
 		
 		cout << endl;
@@ -93,6 +92,8 @@ int main()
 		else			
 			break;
 	}
+	
+	cout << start_vertex->getAdjList()->begin()->getAdjList()->size() << endl;
 	
 	do{
 		int option;
@@ -128,4 +129,3 @@ int main()
 	
 	return 0;
 }
- 
